@@ -1,14 +1,14 @@
 // src/components/Header/Header.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import profileImage from '../../assets/IMG_6527.JPEG'; // Import the image
 
 const Header = () => {
   return (
     <header>
       <div className="header-branding">
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <div className="profile-image"></div>
+          <img src={profileImage} alt="James Prawdzik" className="profile-image" />
           <div className="header-title">
             <h1>James Prawdzik</h1>
             <p>Software Engineer</p>

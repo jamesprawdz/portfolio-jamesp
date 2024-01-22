@@ -1,8 +1,15 @@
 #root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Stretch the root element to at least the height of the viewport */
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+main {
+  flex-grow: 1; /* Grow to take up all available space not used by header and footer */
 }
 
 .logo {
@@ -40,7 +47,6 @@
 .read-the-docs {
   color: #888;
 }
-
 
 /* General Styles */
 body,
@@ -124,56 +130,39 @@ section {
   padding: 2em 5%;
 }
 
-/* Portfolio Section Styles */
-#portfolio {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 15px;
-}
-
-.portfolio-item {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin-bottom: 2em;
-  transition: box-shadow 0.3s ease;
-}
-
-.portfolio-item img {
-  max-width: 100%;
-  height: auto;
-  border-bottom: 1px solid #eee;
-}
-
-.portfolio-item h3 {
-  background: #f4f4f4;
-  padding: 0.5em 1em;
-  margin: 0;
-  color: #333;
-}
-
-.portfolio-item p {
+#portfolio .portfolio-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1em;
-  margin: 0;
-  line-height: 1.6;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2em;
 }
 
-.portfolio-item a {
-  display: inline-block;
-  padding: 0.5em 1em;
-  margin: 1em;
-  background: #04c2c9;
-  color: white;
+#portfolio .portfolio-item img {
+  width: 100%;
+  max-width: 300px; /* Limit the image width */
+  height: auto;
+  border-radius: 8px;
+}
+
+#portfolio .portfolio-item h3 {
+  color: #333;
+  margin-top: 1em;
+}
+
+#portfolio .portfolio-item p {
+  color: #666;
+  text-align: center;
+}
+
+#portfolio .portfolio-item a {
+  color: #04c2c9;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.portfolio-item a:hover {
-  background-color: #029dac;
+  margin-top: 1em;
 }
 
 /* Contact Section Styles */
@@ -183,6 +172,7 @@ section {
 }
 
 #contact h2 {
+  color: #333; /* Set the color to ensure visibility */
   text-align: center; /* Centers the heading text */
   margin-bottom: 1em; /* Adds space below the heading */
 }
@@ -227,6 +217,17 @@ section {
   background-color: #038c9a; /* Slightly darker hover state */
 }
 
+#confirmationMessage {
+  display: block; /* Change this as per your state if it's controlled by React state */
+  padding: 1em;
+  margin-top: 1em; /* Spacing above the message */
+  background-color: #e7f5ff; /* A light blue background for visibility */
+  color: #31708f; /* A color that contrasts well with the light blue background */
+  border: 1px solid #bce8f1; /* A subtle border that complements the background */
+  border-radius: 4px; /* Rounded corners for the message bubble */
+  text-align: center;
+}
+
 /* Social Links Section */
 .social-links {
   padding: 1em 0; /* Less vertical padding */
@@ -234,7 +235,8 @@ section {
   color: white;
 }
 
-.social-links div { /* Updated selector for direct child div of social-links section */
+.social-links div {
+  /* Updated selector for direct child div of social-links section */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -262,17 +264,69 @@ footer {
   color: white;
   text-align: center;
   padding: 1em 0;
-  margin-top: auto;
+  margin-top: auto; /* Push the footer to the bottom of the layout */
 }
 
 footer p {
   margin: 0;
 }
 
+/* About Section Styles */
+#about {
+  background-color: #f4f4f4; /* A light grey background */
+  border-radius: 8px;
+  padding: 2em;
+  margin: 2em auto; /* Center the about section */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* A subtle shadow */
+  text-align: left; /* Align text to the left for about section */
+}
+
+#about h2 {
+  color: #333;
+  margin-bottom: 0.5em;
+}
+
+#about h3 {
+  color: #333; /* Dark grey for better visibility */
+}
+
+#about p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #666;
+}
+
+#about .skills-list {
+  list-style-type: none; /* Removes the default list bullet */
+  padding: 0;
+}
+
+#about .skills-list li {
+  background-color: #fff;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  border-radius: 4px;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
   header {
     padding: 1.5em 0;
+  }
+
+  .social-link {
+    margin: 0 10px;
+    /* Adjust the size of the icons on smaller screens if necessary */
+    svg {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  #about {
+    margin: 2em 1em; /* Adjust margins for smaller screens */
   }
 
   .header-branding {
@@ -291,6 +345,7 @@ footer p {
     margin: 10px 0;
   }
 
+  /* Portfolio Styles */
   #portfolio {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
@@ -302,14 +357,5 @@ footer p {
   #contact form {
     width: calc(100% - 40px); /* Full width minus some padding */
     margin: 20px; /* Give some space around the form */
-  }
-
-  .social-link {
-    margin: 0 10px; /* Less space between icons on small screens */
-  }
-
-  .social-link svg {
-    width: 40px; /* Smaller icons on small screens */
-    height: 40px;
   }
 }
